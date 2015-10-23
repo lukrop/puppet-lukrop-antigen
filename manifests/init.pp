@@ -31,10 +31,10 @@
 #
 include stdlib
 class antigen (
-  String $zsh = $antigen::params::zsh,
-  String $home = $antigen::params::home,
-  String $git_pkg = $antigen::params::git_pkg,
-  String $zsh_pkg = $antigen::params::zsh_pkg,
+  $zsh = $antigen::params::zsh,
+  $home = $antigen::params::home,
+  $git_pkg = $antigen::params::git_pkg,
+  $zsh_pkg = $antigen::params::zsh_pkg,
 ) inherits antigen::params {
     # install git and zsh if not present
     if(! defined( Package['git'] )) {

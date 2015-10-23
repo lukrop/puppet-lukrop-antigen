@@ -30,10 +30,10 @@
 # Copyright 2015 Lukas Kropatschek.
 #
 define antigen::install (
-  String $user = $title,
-  String $library = 'oh-my-zsh',
-  String $theme = 'clean',
-  Array $bundles = ['git'],
+  $user = $title,
+  $library = 'oh-my-zsh',
+  $theme = 'clean',
+  $bundles = ['git'],
 ) {
   # make appropriate changes for root
   if $user == 'root' { $home = '/root' } else { $home = "${antigen::home}/$user" }
