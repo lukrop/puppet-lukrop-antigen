@@ -1,79 +1,58 @@
-# antigen
+# lukrop-antigen puppet module
 
 #### Table of Contents
 
 1. [Overview](#overview)
-2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - The basics of getting started with antigen](#setup)
+2. [Setup - The basics of getting started with antigen](#setup)
     * [What antigen affects](#what-antigen-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with antigen](#beginning-with-antigen)
-4. [Usage - Configuration options and additional functionality](#usage)
-5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
+3. [Usage - Configuration options and additional functionality](#usage)
+4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 
 ## Overview
-
-A one-maybe-two sentence summary of what the module does/what problem it solves.
-This is your 30 second elevator pitch for your module. Consider including
-OS/Puppet version it works with.
-
-## Module Description
-
-If applicable, this section should have a brief description of the technology
-the module integrates with and what that integration enables. This section
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?"
-
-If your module has a range of functionality (installation, configuration,
-management, etc.) this is the time to mention it.
+Installs [antigen](https://github.com/zsh-users/antigen) to easily manage your zsh plugins,
+called bundles (e.g. [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)).
 
 ## Setup
 
 ### What antigen affects
+This module..
+* clones the antigen git repository to `$HOME/.antigen`
+* creates a file `$HOME/.antigen-puppet.zsh` which contains the appropriate antigen commands
+to apply a theme, use a library and bundles.
+* creates a line in `$HOME/.zshrc` containing `source $HOME/.antigen-puppet.zsh`. If `$HOME/.zshrc`
+is not present it will be created.
 
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
-
-### Beginning with antigen
-
-The very basic steps needed for a user to get the module up and running.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you may wish to include an additional section here: Upgrading
-(For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
+`$HOME` is the home directory of the supplied user.
 
 ## Usage
+```# include base class
+include antigen
 
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+# install for a single user with defaults
+antigen::install { 'lukrop': }
+
+# install for a single user with specified theme and bundles
+antigen::install { 'lukrop':
+  theme => 'mrtazz',
+  bundles => ['git', 'ruby'],
+}
+
+#install for multiple users
+antigen::install { ['root', 'lukrop']: }
+```
 
 ## Reference
+`antigen` parameters:
 
-Here, list the classes, types, providers, facts, etc contained in your module.
-This section should include all of the under-the-hood workings of your module so
-people know what the module is touching on their system but don't need to mess
-with things. (We are working on automating this section!)
+* `zsh` path to zsh binary.
+* `home` base path for users home directories.
 
-## Limitations
+Both, `zsh` and `home` have sensible defaults depending on `$::operatingsystem`. Supported are GNU/Linux, BSD and Darwin.
 
-This is where you list OS compatibility, version compatibility, etc.
+`antigen::install` parameters:
 
-## Development
+* `user` user for whom to install antigen. If none is supplied the resource name is used.
+* `library` which zsh base library to use. Options are 'oh-my-zsh' or 'prezto'. Default: 'oh-my-zsh'
+* `theme` name of the zsh prompt theme. Default: 'clean'
+* `bundles` list of bundles to use. Default: ['git']
 
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
-
-## Release Notes/Contributors/Etc **Optional**
-
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You may also add any additional sections you feel are
-necessary or important to include here. Please use the `## ` header.
