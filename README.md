@@ -25,7 +25,8 @@ is not present it will be created.
 `$HOME` is the home directory of the supplied user.
 
 ## Usage
-```# include base class
+```bash
+# include base class
 include antigen
 
 # install for a single user with defaults
