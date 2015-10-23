@@ -25,7 +25,7 @@ is not present it will be created.
 `$HOME` is the home directory of the supplied user.
 
 ## Usage
-```bash
+```puppet
 # include base class
 include antigen
 
