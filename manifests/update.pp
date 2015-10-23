@@ -25,6 +25,7 @@ define antigen::update ($user = $title) {
   $antigen_repo = "${antigen::home}/$user/.antigen"
   exec { 'antigen_exec_update':
     command => "source $antigen_repo/antigen.zsh && antigen update",
+    path => '/usr/bin:/usr/sbin:/bin',
     user => $user,
     cwd => "${antigen::home}/$user",
     require => [Antigen::Install[$user]],
