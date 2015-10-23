@@ -4,9 +4,9 @@
   "author": "lukrop",
   "summary": "Installs antigen to easily manage your zsh plugins, called bundles (e.g. oh-my-zsh).",
   "license": "Apache 2.0",
-  "source": "github",
-  "project_page": "github",
-  "issues_url": "github",
+  "source": "https://github.com/lukrop/puppet-lukrop-antigen.git",
+  "project_page": "https://github.com/lukrop/puppet-lukrop-antigen",
+  "issues_url": "https://github.com/lukrop/puppet-lukrop-antigen/issues",
   "dependencies": [
     {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
     {"name":"puppetlabs-vcsrepo","version_requirement":">= 1.3.1"}
