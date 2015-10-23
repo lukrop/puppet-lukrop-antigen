@@ -68,7 +68,7 @@ define antigen::install (
       }
   } else {
     exec { 'antigen_exec_chsh':
-      command => "chsh -s $antigen::zsh $user",
+      command => "/usr/bin/chsh -s $antigen::zsh $user",
     }
   }
 }
