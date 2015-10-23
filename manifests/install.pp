@@ -30,15 +30,13 @@
 # Copyright 2015 Lukas Kropatschek.
 #
 define antigen::install (
-  $library = 'oh-my-zsh',
-  $theme = 'clean',
-  $bundles = ['git'],
+  String $user = $title,
+  String $library = 'oh-my-zsh',
+  String $theme = 'clean',
+  Array $bundles = ['git'],
 ) {
-  # if no user is supplied we take the resource name
-  if !$user { $user = $name }
-
   # make appropriate changes for root
-  if $user == 'root' { $home = '/root' } else { $home = "${antigen::params::home}/$user" }
+  if $user == 'root' { $home = '/root' } else { $home = "${antigen::home}/$user" }
 
   $antigen_repo = "$home/.antigen"
   # clone antigen to users home directory
@@ -64,18 +62,14 @@ define antigen::install (
   }
 
   # set zsh as default shell for the user
-  if ! defined(User[$name]) {
-      user { "antigen::user ${name}":
-        ensure     => present,
-        name       => $name,
-        managehome => true,
-        shell      => $antigen::params::zsh,
-        require    => Package['zsh'],
+  if defined(User[$user]) {
+      User <| title == $user |> {
+        shell => $antigen::zsh
       }
-    } else {
-      User <| title == $name |> {
-        shell => $antigen::params::zsh
-      }
+  } else {
+    exec { 'antigen_exec_chsh':
+      command => "chsh -s $antigen::zsh $user",
     }
+  }
 }
 

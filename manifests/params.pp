@@ -23,14 +23,20 @@ class antigen::params {
     /(?i:FreeBSD)/: {
       $zsh = '/usr/local/bin/zsh'
       $home = '/home'
+      $zsh_pkg = 'zsh'
+      $git_pkg = 'git'
     }
     /(?i:Darwin)/: {
       $zsh = '/bin/zsh'
       $home = '/Users'
+      $zsh_pkg = 'zsh'
+      $git_pkg = 'git'
     }
     default: {
       $zsh = '/usr/bin/zsh'
       $home = '/home'
+      $zsh_pkg = 'zsh'
+      $git_pkg = 'git'
     }
   }
 }

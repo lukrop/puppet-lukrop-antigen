@@ -30,19 +30,21 @@
 # Copyright 2015 Lukas Kropatschek.
 #
 include stdlib
-class antigen
-  ($zsh = $antigen::params::zsh,
-  $home = $antigen::params::home)
-  inherits antigen::params {
+class antigen (
+  String $zsh = $antigen::params::zsh,
+  String $home = $antigen::params::home,
+  String $git_pkg = $antigen::params::git_pkg,
+  String $zsh_pkg = $antigen::params::zsh_pkg,
+) inherits antigen::params {
     # install git and zsh if not present
     if(! defined( Package['git'] )) {
-        package { 'git':
+        package { $antigen::git_pkg:
             ensure => present,
         }
     }
 
     if(! defined( Package['zsh'] )) {
-        package { 'zsh':
+        package { $antigen::zsh_pkg:
             ensure => present,
         }
     }
