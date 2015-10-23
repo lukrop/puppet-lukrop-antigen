@@ -21,7 +21,7 @@ $ puppet module install lukrop-antigen
 
 Or simply clone this git repository:
 ```shell
-$ git clone https://github.com/lukrop/puppet-lukrop-antigen.git
+$ git clone https://github.com/lukrop/puppet-lukrop-antigen.git $MODULES_PATH/antigen
 ```
 
 ### What antigen affects
