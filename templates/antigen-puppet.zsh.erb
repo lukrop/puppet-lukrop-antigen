@@ -2,9 +2,11 @@ source <%= @antigen_repo %>/antigen.zsh
 antigen use <%= @library %>
 antigen theme <%= @theme %>
 <% unless @bundles.empty? -%>
+antigen bundles <<EOBUNDLES
 <% @bundles.flatten.each do |bundle| -%>
-antigen bundle <%= bundle %>
+  <%= bundle %>
 <% end -%>
+EOBUNDLES
 <% end %>
 antigen apply
 
