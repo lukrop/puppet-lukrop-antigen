@@ -38,22 +38,40 @@ antigen::install { 'lukrop':
   bundles => ['git', 'ruby'],
 }
 
-#install for multiple users
+# install for multiple users
 antigen::install { ['root', 'lukrop']: }
+
+# update all bundles for a user
+antigen::update { 'lukrop': }
+
+# selfupdate (update antigen itself)
+antigen::selfupdate { ['lukrop', 'root'] }
+
 ```
 
 ## Reference
 `antigen` parameters:
 
-* `zsh` path to zsh binary.
-* `home` base path for users home directories.
+* `zsh` 
+path to zsh binary.
+* `home` 
+base path for users home directories.
+* `git_pkg`
+optionally supply the name of the git package to be installed. Default: 'git'.
+* `zsh_pkg`
+optionally supply the name of the zsh package to be installed. Default: 'zsh'.
+
 
 Both, `zsh` and `home` have sensible defaults depending on `$::operatingsystem`. Supported are GNU/Linux, BSD and Darwin.
 
 `antigen::install` parameters:
 
-* `user` user for whom to install antigen. If none is supplied the resource name is used.
-* `library` which zsh base library to use. Options are 'oh-my-zsh' or 'prezto'. Default: 'oh-my-zsh'
-* `theme` name of the zsh prompt theme. Default: 'clean'
-* `bundles` list of bundles to use. Default: ['git']
+* `user`
+user for whom to install antigen. If none is supplied the resource name is used.
+* `library` 
+which zsh base library to use. Options are 'oh-my-zsh' or 'prezto'. Default: 'oh-my-zsh'
+* `theme` 
+name of the zsh prompt theme. Default: 'clean'
+* `bundles` 
+list of bundles to use. Default: ['git']
 
