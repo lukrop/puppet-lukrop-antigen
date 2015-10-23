@@ -34,6 +34,8 @@ define antigen::install (
   $library = 'oh-my-zsh',
   $theme = 'clean',
   $bundles = ['git'],
+  $update_prompt = true,
+  $auto_update = true,
 ) {
   # make appropriate changes for root
   if $user == 'root' { $home = '/root' } else { $home = "${antigen::home}/$user" }

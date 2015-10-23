@@ -74,4 +74,10 @@ Both, `zsh` and `home` have sensible defaults depending on `$::operatingsystem`.
   name of the zsh prompt theme. Default: 'clean'
 * `bundles` 
   list of bundles to use. Default: ['git']
+* `auto_update`
+  if using oh-my-zsh as base library, whether to automatically update oh-my-zsh. This just
+  exports `DISABLE_AUTO_UPDATE=true`. Default: true.
+* `update_prompt`
+  if using oh-my-zsh as base library, whether to show the update prompt. This just exports
+  `DISABLE_UPDATE_PROMPT=true`. Default: true.
 
