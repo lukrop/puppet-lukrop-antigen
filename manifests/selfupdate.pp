@@ -21,12 +21,14 @@
 #
 
 define antigen::selfupdate ($user = $title) {
-  $antigen_repo = "${antigen::home}/$user/.antigen"
+  if $user == 'root' {
+    $antigen_repo = '/root/.antigen'
+  } else {
+    $antigen_repo = "${antigen::home}/$user/.antigen"
+  }
   exec { 'antigen_exec_selfupdate':
-    command => "source $antigen_repo/antigen.zsh && antigen selfupdate",
-    path => '/usr/bin:/usr/sbin:/bin',
+    command => "$antigen::zsh -c 'source $antigen_repo/antigen.zsh && antigen selfupdate'",
     user => $user,
-    cwd => "${antigen::home}/$user",
     require => [Antigen::Install[$user]],
   }
 }

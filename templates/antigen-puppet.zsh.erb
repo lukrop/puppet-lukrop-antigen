@@ -10,10 +10,6 @@ EOBUNDLES
 <% end %>
 antigen apply
 
-<% unless @update_prompt -%>
-DISABLE_UPDATE_PROMPT=true
-<% end %>
-<% unless @auto_update -%>
-DISABLE_AUTO_UPDATE=true
-<% end %>
+<% unless @update_prompt -%>DISABLE_UPDATE_PROMPT=true<% end %>
+<% unless @auto_update -%>DISABLE_AUTO_UPDATE=true<% end %>
 
