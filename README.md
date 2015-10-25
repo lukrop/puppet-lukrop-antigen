@@ -62,21 +62,13 @@ antigen::selfupdate { ['lukrop', 'root']: }
 ## Reference
 `antigen` parameters:
 
-* `zsh` 
+* `zsh` path to zsh binary.
 
- path to zsh binary.
+* `home` base path for users home directories.
 
-* `home` 
+* `git_pkg` optionally supply the name of the git package to be installed. Default: 'git'.
 
- base path for users home directories.
-
-* `git_pkg`
-
-  optionally supply the name of the git package to be installed. Default: 'git'.
-
-* `zsh_pkg`
-
-  optionally supply the name of the zsh package to be installed. Default: 'zsh'.
+* `zsh_pkg` optionally supply the name of the zsh package to be installed. Default: 'zsh'.
 
 
 
@@ -84,30 +76,18 @@ Both, `zsh` and `home` have sensible defaults depending on `$::operatingsystem`.
 
 `antigen::install` parameters:
 
-* `user`
+* `user` user for whom to install antigen. If none is supplied the resource name is used.
 
-  user for whom to install antigen. If none is supplied the resource name is used.
+* `library` which zsh base library to use. Options are 'oh-my-zsh' or 'prezto'. Default: 'oh-my-zsh'
 
-* `library` 
+* `theme` name of the zsh prompt theme. Default: 'clean'
 
-  which zsh base library to use. Options are 'oh-my-zsh' or 'prezto'. Default: 'oh-my-zsh'
+* `bundles` list of bundles to use. Default: ['git']
 
-* `theme` 
-
-  name of the zsh prompt theme. Default: 'clean'
-
-* `bundles` 
-
-  list of bundles to use. Default: ['git']
-
-* `auto_update`
-
-  if using oh-my-zsh as base library, whether to automatically update oh-my-zsh. This just
+* `auto_update` if using oh-my-zsh as base library, whether to automatically update oh-my-zsh. This just
   exports `DISABLE_AUTO_UPDATE=true`. Default: true.
 
-* `update_prompt`
-
-  if using oh-my-zsh as base library, whether to show the update prompt. This just exports
+* `update_prompt` if using oh-my-zsh as base library, whether to show the update prompt. This just exports
   `DISABLE_UPDATE_PROMPT=true`. Default: true.
 
 
