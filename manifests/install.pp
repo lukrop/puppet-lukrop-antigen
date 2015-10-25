@@ -57,8 +57,8 @@ define antigen::install (
   # source our antigen-puppet.zsh in users .zshrc
   file { "$home/.zshrc": ensure => present }
   file_line { "source antigen-puppet.zsh for ${user}" :
-    path => "$home/.zshrc",
     ensure => present,
+    path => "$home/.zshrc",
     line => "source $home/.antigen-puppet.zsh",
     require => [Vcsrepo[$antigen_repo], File["$home/.antigen-puppet.zsh"], File["$home/.zshrc"]],
   }

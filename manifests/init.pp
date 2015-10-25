@@ -39,13 +39,13 @@ class antigen (
     # install git and zsh if not present
     if(! defined( Package['git'] )) {
         package { $antigen::git_pkg:
-            ensure => present,
+          ensure => present,
         }
     }
 
     if(! defined( Package['zsh'] )) {
         package { $antigen::zsh_pkg:
-            ensure => present,
+          ensure => present,
         }
     }
 }
