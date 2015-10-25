@@ -57,9 +57,6 @@ define antigen::install (
 
   # source our antigen-puppet.zsh in users .zshrc
   file { "$home/.zshrc": ensure => present }
-<<<<<<< HEAD
-  file_line { "source antigen-puppet.zsh for ${user}" :
-=======
 
   if $force_replace {
     File <| title == "$home/.zshrc" |> {
@@ -71,7 +68,6 @@ define antigen::install (
 
   file_line { "source antigen-puppet.zsh for ${user}":
     path => "$home/.zshrc",
->>>>>>> added zshrc
     ensure => present,
     path => "$home/.zshrc",
     line => "source $home/.antigen-puppet.zsh",
