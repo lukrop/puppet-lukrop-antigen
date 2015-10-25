@@ -56,7 +56,7 @@ define antigen::install (
 
   # source our antigen-puppet.zsh in users .zshrc
   file { "$home/.zshrc": ensure => present }
-  file_line { 'source antigen-puppet.zsh' :
+  file_line { "source antigen-puppet.zsh for ${user}" :
     path => "$home/.zshrc",
     ensure => present,
     line => "source $home/.antigen-puppet.zsh",
@@ -69,7 +69,7 @@ define antigen::install (
         shell => $antigen::zsh
       }
   } else {
-    exec { 'antigen_exec_chsh':
+    exec { "chsh zsh for ${user}":
       command => "/usr/bin/chsh -s $antigen::zsh $user",
     }
   }
