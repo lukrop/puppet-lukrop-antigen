@@ -36,6 +36,7 @@ define antigen::install (
   $bundles = ['git'],
   $update_prompt = true,
   $auto_update = true,
+  $force_replace = false,
 ) {
   # make appropriate changes for root
   if $user == 'root' { $home = '/root' } else { $home = "${antigen::home}/$user" }
@@ -56,7 +57,21 @@ define antigen::install (
 
   # source our antigen-puppet.zsh in users .zshrc
   file { "$home/.zshrc": ensure => present }
+<<<<<<< HEAD
   file_line { "source antigen-puppet.zsh for ${user}" :
+=======
+
+  if $force_replace {
+    File <| title == "$home/.zshrc" |> {
+      replace => true,
+      content => 'puppet:///modules/antigen/zshrc',
+      before => File_Line["source antigen-puppet.zsh for ${user}"]
+    }
+  }
+
+  file_line { "source antigen-puppet.zsh for ${user}":
+    path => "$home/.zshrc",
+>>>>>>> added zshrc
     ensure => present,
     path => "$home/.zshrc",
     line => "source $home/.antigen-puppet.zsh",
