@@ -42,27 +42,27 @@ define antigen::install (
   $force_replace = false,
 ) {
   # make appropriate changes for root
-  if $user == 'root' { $home = '/root' } else { $home = "${antigen::home}/$user" }
+  if $user == 'root' { $home = '/root' } else { $home = "${antigen::home}/${user}" }
 
-  $antigen_repo = "$home/.antigen"
+  $antigen_repo = "${home}/.antigen"
   # clone antigen to users home directory
   vcsrepo { $antigen_repo :
-    ensure => present,
+    ensure   => present,
     provider => git,
-    source => 'https://github.com/zsh-users/antigen.git',
-    user => $user,
+    source   => 'https://github.com/zsh-users/antigen.git',
+    user     => $user,
   }
 
-  file { "$home/.antigen-puppet.zsh":
+  file { "${home}/.antigen-puppet.zsh":
     content => template('antigen/antigen-puppet.zsh.erb'),
-    owner => $user,
+    owner   => $user,
   }
 
   # source our antigen-puppet.zsh in users .zshrc
-  file { "$home/.zshrc": ensure => present }
+  file { "${home}/.zshrc": ensure => present }
 
   if $force_replace {
-    File <| title == "$home/.zshrc" |> {
+    File <| title == "${home}/.zshrc" |> {
       replace => true,
       source => 'puppet:///modules/antigen/zshrc',
       before => File_Line["source antigen-puppet.zsh for ${user}"]
@@ -70,10 +70,10 @@ define antigen::install (
   }
 
   file_line { "source antigen-puppet.zsh for ${user}":
-    ensure => present,
-    path => "$home/.zshrc",
-    line => "source ~/.antigen-puppet.zsh",
-    require => [Vcsrepo[$antigen_repo], File["$home/.antigen-puppet.zsh"], File["$home/.zshrc"]],
+    ensure  => present,
+    path    => "${home}/.zshrc",
+    line    => 'source ~/.antigen-puppet.zsh',
+    require => [Vcsrepo[$antigen_repo], File["${home}/.antigen-puppet.zsh"], File["${home}/.zshrc"]],
   }
 
   # set zsh as default shell for the user
@@ -83,7 +83,7 @@ define antigen::install (
       }
   } else {
     exec { "chsh zsh for ${user}":
-      command => "/usr/bin/chsh -s $antigen::zsh $user",
+      command => "/usr/bin/chsh -s ${antigen::zsh} ${user}",
     }
   }
 }

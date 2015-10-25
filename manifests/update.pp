@@ -25,11 +25,11 @@ define antigen::update ($user = $title) {
   if $user == 'root' {
     $antigen_repo = '/root/.antigen'
   } else {
-    $antigen_repo = "${antigen::home}/$user/.antigen"
+    $antigen_repo = "${antigen::home}/${user}/.antigen"
   }
   exec { "antigen update for ${user}":
-    command => "$antigen::zsh -c 'source $antigen_repo/antigen.zsh && antigen update'",
-    user => $user,
+    command => "${antigen::zsh} -c 'source ${antigen_repo}/antigen.zsh && antigen update'",
+    user    => $user,
     require => [Antigen::Install[$user]],
   }
 }
