@@ -61,7 +61,7 @@ define antigen::install (
   if $force_replace {
     File <| title == "$home/.zshrc" |> {
       replace => true,
-      content => 'puppet:///modules/antigen/zshrc',
+      source => 'puppet:///modules/antigen/zshrc',
       before => File_Line["source antigen-puppet.zsh for ${user}"]
     }
   }
