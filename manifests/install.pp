@@ -16,6 +16,9 @@
 # [*bundles*]
 #   list of bundles to use. Default: ['git']
 #
+# [*force_replace*]
+#   overwrites existing .zshrc. Default: false
+#
 # === Examples
 #
 #  include antigen

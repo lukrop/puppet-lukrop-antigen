@@ -90,4 +90,6 @@ Both, `zsh` and `home` have sensible defaults depending on `$::operatingsystem`.
 * `update_prompt` if using oh-my-zsh as base library, whether to show the update prompt. This just exports
   `DISABLE_UPDATE_PROMPT=true`. Default: true.
 
+* `force_replace` overwrites existing .zshrc. Default: false.
+
 
