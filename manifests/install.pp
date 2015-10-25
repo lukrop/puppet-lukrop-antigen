@@ -69,7 +69,7 @@ define antigen::install (
   file_line { "source antigen-puppet.zsh for ${user}":
     ensure => present,
     path => "$home/.zshrc",
-    line => "source $home/.antigen-puppet.zsh",
+    line => "source ~/.antigen-puppet.zsh",
     require => [Vcsrepo[$antigen_repo], File["$home/.antigen-puppet.zsh"], File["$home/.zshrc"]],
   }
 
