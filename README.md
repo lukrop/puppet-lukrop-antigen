@@ -31,6 +31,7 @@ This module..
 to apply a theme, use a library and bundles.
 * creates a line in `$HOME/.zshrc` containing `source $HOME/.antigen-puppet.zsh`. If `$HOME/.zshrc`
 is not present it will be created.
+* changes the given user's shell to zsh
 
 `$HOME` is the home directory of the supplied user.
 
