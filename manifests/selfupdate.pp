@@ -26,7 +26,7 @@ define antigen::selfupdate ($user = $title) {
   } else {
     $antigen_repo = "${antigen::home}/$user/.antigen"
   }
-  exec { 'antigen_exec_selfupdate':
+  exec { "antigen selfupdate for ${user}":
     command => "$antigen::zsh -c 'source $antigen_repo/antigen.zsh && antigen selfupdate'",
     user => $user,
     require => [Antigen::Install[$user]],
