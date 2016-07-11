@@ -49,10 +49,10 @@ define antigen::install (
   if $force_replace {
     # check if $antigen_repo exists, but is not an actual repo.
     exec { "force delete existing ${antigen_repo} folder":
-      path => ['/bin', '/usr/bin'],
+      path    => ['/bin', '/usr/bin'],
       command => "rm -rf ${antigen_repo}",
       onlyif  => "test ! -d ${antigen_repo}/.git",
-      before => Vcsrepo[$antigen_repo]
+      before  => Vcsrepo[$antigen_repo]
     }
   }
 
