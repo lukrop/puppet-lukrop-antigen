@@ -17,7 +17,7 @@
 #   list of bundles to use. Default: ['git']
 #
 # [*force_replace*]
-#   overwrites existing .zshrc. Default: false
+#   overwrites existing .zshrc and deletes ~/.antigen if no valid git repo. Default: false
 #
 # === Examples
 #
@@ -45,6 +45,17 @@ define antigen::install (
   if $user == 'root' { $home = '/root' } else { $home = "${antigen::home}/${user}" }
 
   $antigen_repo = "${home}/.antigen"
+
+  if $force_replace {
+    # check if $antigen_repo exists, but is not an actual repo.
+    exec { "force delete existing ${antigen_repo} folder":
+      path => ['/bin', '/usr/bin'],
+      command => "rm -rf ${antigen_repo}",
+      onlyif  => "test ! -d ${antigen_repo}/.git",
+      before => Vcsrepo[$antigen_repo]
+    }
+  }
+
   # clone antigen to users home directory
   vcsrepo { $antigen_repo :
     ensure   => present,
