@@ -80,6 +80,6 @@ Both, `zsh` and `home` have sensible defaults depending on `$::operatingsystem`.
 exports `DISABLE_AUTO_UPDATE=true`. Default: true.
 * `update_prompt` if using oh-my-zsh as base library, whether to show the update prompt. This just exports
 `DISABLE_UPDATE_PROMPT=true`. Default: true.
-* `force_replace` overwrites existing .zshrc. Default: false.
+* `force_replace` overwrites existing .zshrc and deletes ~/.antigen if no valid git repo. Default: false.
 
 
