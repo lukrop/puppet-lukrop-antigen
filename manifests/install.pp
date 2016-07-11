@@ -83,7 +83,9 @@ define antigen::install (
       }
   } else {
     exec { "chsh zsh for ${user}":
-      command => "/usr/bin/chsh -s ${antigen::zsh} ${user}",
+      command => "chsh -s ${antigen::zsh} ${user}",
+      onlyif  => "test `getent passwd ${user} | cut -d: -f7` != ${antigen::zsh}",
+      path    => '/usr/bin',
     }
   }
 }
