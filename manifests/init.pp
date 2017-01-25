@@ -46,6 +46,7 @@ class antigen (
     if(! defined( Package['zsh'] )) {
         package { $antigen::zsh_pkg:
           ensure => present,
+          before => Class['antigen::install'],
         }
     }
 }
