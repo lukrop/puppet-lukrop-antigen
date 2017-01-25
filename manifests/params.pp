@@ -32,6 +32,19 @@ class antigen::params {
       $zsh_pkg = 'zsh'
       $git_pkg = 'git'
     }
+    /(?i:Debian)/: {
+      case $::lsbdistcodename {
+        'stretch': {
+          $zsh = '/bin/zsh'
+        }
+        default: {
+          $zsh = '/usr/bin/zsh'
+        }
+      }
+      $home = '/home'
+      $zsh_pkg = 'zsh'
+      $git_pkg = 'git'
+    }
     default: {
       $zsh = '/usr/bin/zsh'
       $home = '/home'
