@@ -38,15 +38,19 @@ class antigen (
 ) inherits antigen::params {
     # install git and zsh if not present
     if(! defined( Package['git'] )) {
+        include ::apt
         package { $antigen::git_pkg:
           ensure => present,
+          require => Class['apt::update'],
         }
     }
 
     if(! defined( Package['zsh'] )) {
+        include ::apt
         package { $antigen::zsh_pkg:
-          ensure => present,
-          before => Class['antigen::install'],
+          ensure  => present,
+          #before => Class['antigen::install'],
+          require => Class['apt::update'],
         }
     }
 }
